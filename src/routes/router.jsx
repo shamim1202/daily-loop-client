@@ -1,7 +1,10 @@
 import { createBrowserRouter } from "react-router";
+import AuthLayout from "../layout/AuthLayout";
 import RootLayout from "../layout/HomeLayout";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -13,16 +16,16 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: "/add_habit",
-        element: <h1>Add habit route</h1>,
+        path: "public_habits",
+        element: <h1>Public Habits</h1>,
       },
       {
         path: "my_habits",
-        element: <h1>All my habit route</h1>,
+        element: <h1>My Habits</h1>,
       },
       {
-        path: "public_habits",
-        element: <h1>Browse all public habits</h1>,
+        path: "add_habit",
+        element: <h1>Add habit</h1>,
       },
       {
         path: "habit_details/:id",
@@ -33,15 +36,15 @@ const router = createBrowserRouter([
 
   {
     path: "/auth",
-    element: <h1>Authlayout</h1>,
+    Component: AuthLayout,
     children: [
       {
-        path: "login",
-        element: <h1>Login page</h1>,
+        path: "/auth/login",
+        Component: Login,
       },
       {
-        path: "register",
-        element: <h1>Register page</h1>,
+        path: "/auth/register",
+        Component: Register,
       },
       {
         path: "forgot_password",
@@ -51,7 +54,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/*",
-    Component: ErrorPage
+    Component: ErrorPage,
   },
 ]);
 

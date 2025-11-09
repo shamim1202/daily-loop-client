@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <div className="bg-primary text-white md:py-8 p-5 md:p-0">
+    <div className="bg-green-100 text-primary md:py-8 p-5 md:p-0">
       <div className="md:max-w-7xl mx-auto flex flex-col-reverse md:flex-row md:gap-40 text-center md:text-left">
         <div className="flex flex-col md:flex-row md:w-full justify-between space-y-3 md:space-y-0">
           <nav>
@@ -98,9 +98,8 @@ const Footer = () => {
         </nav>
 
         <aside className="flex flex-col items-center justify-center">
-          <Link to="/" className="font-bold md:font-extrabold md:text-3xl">
-            Smart
-            <span className="text-secondary md:font-extrabold">Deals</span>
+          <Link to="/">
+            <img src="/src/assets/logo.png" alt="" className="w-14 md:w-20" />
           </Link>
           <p className="text-xs md:text-sm">
             Copyright © {new Date().getFullYear()} - All right reserved

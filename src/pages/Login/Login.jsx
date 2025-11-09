@@ -1,118 +1,179 @@
-import React from "react";
-import { Navigate } from "react-router";
+import { useContext, useState } from "react";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Login = () => {
+  const { user, setUser, signInUser, googleSignIn, loading, setLoading } =
+    useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const handleLogin = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    // setLoading(true);
+    setLoading(true);
 
-    // const form = e.target;
-    // const email = form.email.value;
-    // const password = form.password.value;
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-    // signInUser(email, password)
-    //   .then((res) => {
-    //     const user = res.user;
-    //     setUser(user);
-    //     toast.success(`Welcome back, ${user.displayName || "Guest!"} 👋`);
-    //     setLoading(false);
-    //     form.reset();
-    //     navigate(`${location.state ? location.state : "/"}`);
-    //   })
-    //   .catch((err) => {
-    //     const code = err.code;
-    //     toast.error(`${code}, Login failed! Please try again.`);
-    //     setLoading(false);
-    //   });
+    signInUser(email, password)
+      .then((res) => {
+        const user = res.user;
+        setUser(user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Welcome back, ${user.displayName || "Guest!"}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setLoading(false);
+        form.reset();
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((err) => {
+        const code = err.code;
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: `${code}`,
+          text: "Login failed! Please try again.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setLoading(false);
+      });
   };
 
   const handleGoogleLogin = () => {
-    // googleSignIn()
-    //   .then((result) => {
-    //     const user = result.user;
-    //     setUser(user);
-    //     toast.success(`Welcome back, ${user.displayName || "Guest!"} 👋`);
-    //     navigate(`${location.state ? location.state : "/"}`);
-    //   })
-    //   .catch((err) => {
-    //     const message = err.message;
-    //     toast.error(`${message}, Login failed! Please try again.`);
-    //   });
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Welcome back, ${user.displayName || "Guest!"}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((err) => {
+        const message = err.message;
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: `${message}`,
+          text: "Login failed! Please try again.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      });
   };
 
+  if (loading) return <loading></loading>
 
   return (
-    <div>
-      <div className="py-6 md:py-12 flex flex-col items-center justify-center px-4 md:rounded">
-        {/* ---- Login Card ---- */}
-        <div className="card w-full max-w-md shadow-xl hover:shadow-2xl transition-all duration-300">
-          {loading && <PageLoader message="Logging you in..." type="dots" />}
-          {/* ---- Title ---- */}
-          <h1 className="text-lg md:text-2xl font-bold mt-4 md:mt-6 text-center">
-            Welcome Back 👋 <br />
-            <span className="text-blue-600 text-sm md:text-lg">
-              Login to Your Account
-            </span>
-          </h1>
+    <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100">
+      <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-center">
 
-          <form onSubmit={handleLogin} className="card-body">
-            <fieldset className="fieldset">
-              <label className="label text-sm md:text-lg">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-full text-xs md:text-sm"
-                placeholder="Email"
-              />
+        <div className="py-4 md:py-12 flex md:flex-1 flex-col items-center justify-center px-4 md:rounded">
+          {/* ---- Login Card ---- */}
+          <div className="card w-full max-w-md shadow-xl hover:shadow-2xl transition-all duration-300">
+            {/* {loading && <loading></loading> } */}
+            {/* ---- Title ---- */}
+            <h1 className="text-primary text-lg md:text-4xl font-bold mt-4 md:mt-6 text-center">
+             Login to Your Account
+            </h1>
 
-              <label className="label text-sm md:text-lg mt-3">Password</label>
-              <div className="relative">
+            <form onSubmit={handleLogin} className="card-body">
+              <fieldset className="fieldset">
+                {/* ------- Name Field ------ */}
+                <label className="label text-sm md:text-base">Name</label>
                 <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  className="input input-bordered w-full text-xs md:text-sm pr-10"
-                  placeholder="Password"
-                  required
+                  type="name"
+                  name="name"
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
+                  className="input input-bordered w-full text-xs md:text-sm"
+                  placeholder="Your Name"
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary"
-                >
-                  <span className="md:text-xl">
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+
+                {/* ------- Email Field ------ */}
+                <label className="label text-sm md:text-base">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
+                  className="input input-bordered w-full text-xs md:text-sm"
+                  placeholder="Email"
+                />
+
+                {/* ------- PhotoUrl Field ------ */}
+                <label className="label text-sm md:text-base">Photo-Url</label>
+                <input
+                  type="text"
+                  name="photo_url"
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
+                  className="input input-bordered w-full text-xs md:text-sm"
+                  placeholder="Photo Url"
+                />
+
+                <label className="label text-sm md:text-base">
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    className="input input-bordered w-full text-xs md:text-sm pr-10"
+                    placeholder="Password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary"
+                  >
+                    <span className="md:text-xl">
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                  </button>
+                </div>
+
+                <div className="text-right mt-2">
+                  <span
+                    onClick={() =>
+                      Navigate("/auth/forgot_password", { state: {} })
+                    }
+                    className="link link-hover text-sm md:text-base text-primary cursor-pointer"
+                  >
+                    Forgot password?
                   </span>
-                </button>
-              </div>
+                </div>
 
-              <div className="text-right mt-2">
-                <span
-                  onClick={() =>
-                    Navigate("/auth/forgot_password", { state: { email } })
-                  }
-                  className="link link-hover text-sm md:text-base text-blue-600 cursor-pointer"
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-outline btn-sm md:btn-md md:mt-5 w-full"
                 >
-                  Forgot password?
-                </span>
-              </div>
+                  Login
+                </button>
+              </fieldset>
+            </form>
 
-              <button
-                type="submit"
-                className="btn btn-primary btn-outline btn-sm md:btn-md mt-2 md:mt-5 w-full"
-              >
-                Login
-              </button>
-            </fieldset>
-
-            <div className="divider my-1 text-xs md:my-2 md:text-sm">OR</div>
-
+            <div className="divider mt-0 text-xs md:text-sm">Or</div>
             {/* --------- Google ---------- */}
             <button
               onClick={handleGoogleLogin}
-              className="btn btn-sm md:btn-md bg-white text-black border border-[#dfdfdf] hover:shadow transition-all duration-300"
+              className="btn btn-sm md:btn-md bg-white text-black border border-[#dfdfdf] hover:shadow transition-all duration-300 mx-6"
             >
               <svg
                 aria-label="Google logo"
@@ -145,16 +206,24 @@ const Login = () => {
             </button>
 
             {/* -------- Register Navigation -------- */}
-            <p className="text-center text-sm md:text-base text-gray-600 mt-2 md:mt-4">
+            <p className="text-center text-sm md:text-base text-gray-600 my-2 md:my-5">
               Don’t have an account?{" "}
               <Link
                 to="/auth/register"
-                className="text-blue-600 hover:text-red-500 font-medium hover:underline"
+                className="text-secondary hover:text-red-500 font-medium hover:underline"
               >
                 Register
               </Link>
             </p>
-          </form>
+          </div>
+        </div>
+
+        <div className=" md:flex-1">
+          <img
+            className="md:w-2xl"
+            src="https://i.ibb.co.com/Z64dx37b/login.png"
+            alt=""
+          />
         </div>
       </div>
     </div>

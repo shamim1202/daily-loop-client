@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
@@ -8,6 +9,7 @@ import { AuthContext } from "../../context/AuthProvider";
 const Navbar = () => {
   const { user, signOutUser, loading, setLoading } = useContext(AuthContext);
   const [Open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Navigation Bar Toggle Class
   const navLinkClass = ({ isActive }) =>
@@ -118,18 +120,47 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             <div className="flex items-center gap-2 md:gap-4">
-              <img
-                className="rounded-full w-8 md:w-10 "
-                src={user.photoURL}
-                alt=""
-                title={user.displayName}
-              />
               <button
-                onClick={handleLogOut}
-                className="btn btn-secondary btn-xs md:btn-md"
+                tabIndex={0} // allows blur detection
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="rounded-full w-10 md:w-14 border-2 border-transparent hover:border-secondary transition focus:outline-none"
               >
-                Logout
+                <img
+                  src={user.photoURL || "https://i.ibb.co/YW7tYpT/user.png"}
+                  alt="User Avatar"
+                  className="rounded-full w-full h-full"
+                />
               </button>
+
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    key="dropdown"
+                    tabIndex={0}
+                    onBlur={() => setDropdownOpen(false)} // 💡 closes when focus is lost
+                    initial={{ opacity: 0, scale: 0.9, y: -5 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: -5 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-16 w-56 bg-white border border-gray-200 rounded-xl shadow-lg z-50 focus:outline-none"
+                  >
+                    <div className="p-4 border-b">
+                      <p className="font-semibold text-gray-800">
+                        {user.displayName || "No Name"}
+                      </p>
+                      <p className="text-sm text-gray-500 truncate">
+                        {user.email}
+                      </p>
+                    </div>
+                    <button
+                      onClick={handleLogOut}
+                      className="w-full text-left px-4 py-2 text-sm font-semibold text-red-500 hover:bg-gray-50 hover:rounded-lg"
+                    >
+                      Log out
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ) : (
             <div className="space-x-2 md:space-x-0">

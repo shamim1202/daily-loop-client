@@ -94,16 +94,6 @@ const Login = () => {
 
             <form onSubmit={handleLogin} className="card-body">
               <fieldset className="fieldset">
-                {/* ------- Name Field ------ */}
-                <label className="label text-sm md:text-base">Name</label>
-                <input
-                  type="name"
-                  name="name"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
-                  className="input input-bordered w-full text-xs md:text-sm"
-                  placeholder="Your Name"
-                />
 
                 {/* ------- Email Field ------ */}
                 <label className="label text-sm md:text-base">Email</label>
@@ -114,17 +104,6 @@ const Login = () => {
                   // onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered w-full text-xs md:text-sm"
                   placeholder="Email"
-                />
-
-                {/* ------- PhotoUrl Field ------ */}
-                <label className="label text-sm md:text-base">Photo-Url</label>
-                <input
-                  type="text"
-                  name="photo_url"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
-                  className="input input-bordered w-full text-xs md:text-sm"
-                  placeholder="Photo Url"
                 />
 
                 <label className="label text-sm md:text-base">

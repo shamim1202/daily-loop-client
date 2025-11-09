@@ -5,13 +5,69 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider";
 
 const Register = () => {
-  const { user, signInUser, setUser, googleSignIn } = useContext(AuthContext);
+  const {
+    user,
+    createUser,
+    setUser,
+    updateUser,
+    googleSignIn,
+    loading,
+    setLoading,
+  } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleRegister = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo_url.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        updateUser({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `Registration Successful, ${user.displayName || "Guest!"}`,
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            setLoading(false);
+            form.reset();
+            navigate("/");
+          })
+          .catch((error) => {
+            const code = error.code;
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: `${code}`,
+              text: "Registration failed! Please try again.",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            setUser(user);
+          });
+      })
+      .catch((err) => {
+        const code = err.code;
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: `${code}`,
+          text: "Registration failed! Please try again.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setLoading(false);
+      });
   };
 
   const handleGoogleLogin = () => {
@@ -71,6 +127,7 @@ const Register = () => {
                   // onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered w-full text-xs md:text-sm"
                   placeholder="Your Name"
+                  required
                 />
 
                 {/* ------- Email Field ------ */}
@@ -82,6 +139,7 @@ const Register = () => {
                   // onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered w-full text-xs md:text-sm"
                   placeholder="Email"
+                  required
                 />
 
                 {/* ------- PhotoUrl Field ------ */}
@@ -93,6 +151,7 @@ const Register = () => {
                   // onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered w-full text-xs md:text-sm"
                   placeholder="Photo Url"
+                  required
                 />
 
                 <label className="label text-sm md:text-base">Password</label>
@@ -117,7 +176,7 @@ const Register = () => {
 
                 <button
                   type="submit"
-                  className="btn btn-secondary btn-outline btn-sm md:btn-md md:mt-5 w-full"
+                  className="btn btn-secondary btn-outline btn-sm md:btn-md mt-2.5 md:mt-5 w-full"
                 >
                   Register
                 </button>
@@ -161,7 +220,7 @@ const Register = () => {
             </button>
 
             {/* -------- Register Navigation -------- */}
-            <p className="text-center text-sm md:text-base text-gray-600 my-2 md:my-5">
+            <p className="text-center text-sm md:text-base text-gray-600 my-3 md:my-5">
               Allready have an account?{" "}
               <Link
                 to="/auth/login"

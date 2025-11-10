@@ -5,7 +5,9 @@ import AddHabit from "../pages/AddHabit/AddHabit";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
+import MyHabits from "../pages/MyHabits/MyHabits";
 import Register from "../pages/Register/Register";
+import ViewDetails from "../pages/ViewDetails/ViewDetails";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "my_habits",
-        element: <h1>My Habits</h1>,
+        element: <MyHabits></MyHabits>,
       },
       {
         path: "add_habit",
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "habit_details/:id",
-        element: <h1>Habit details page</h1>,
+        element: <ViewDetails></ViewDetails>,
       },
     ],
   },

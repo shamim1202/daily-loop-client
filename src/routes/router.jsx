@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import AuthLayout from "../layout/AuthLayout";
 import RootLayout from "../layout/HomeLayout";
+import AddHabit from "../pages/AddHabit/AddHabit";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "add_habit",
-        element: <h1>Add habit</h1>,
+        element: <AddHabit></AddHabit>,
       },
       {
         path: "habit_details/:id",

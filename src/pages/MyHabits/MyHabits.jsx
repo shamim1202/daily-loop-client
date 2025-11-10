@@ -60,6 +60,37 @@ const MyHabits = () => {
     }
   };
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This habit will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:3000/delete_habit/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              setHabits((prev) => prev.filter((habit) => habit._id !== id));
+              Swal.fire("Deleted!", "Your habit has been deleted.", "success");
+            }
+          })
+          .catch((err) => {
+            console.error("Error deleting habit:", err);
+            Swal.fire({
+              icon: "error",
+              title: "Failed to delete!",
+              text: "Please try again later.",
+            });
+          });
+      }
+    });
+  };
+
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
@@ -133,7 +164,10 @@ const MyHabits = () => {
                       Update
                     </button>
 
-                    <button className="btn btn-xs md:btn-sm btn-outline btn-error hover:text-white">
+                    <button
+                      onClick={() => handleDelete(habit._id)}
+                      className="btn btn-xs md:btn-sm btn-outline btn-error hover:text-white"
+                    >
                       Delete
                     </button>
 

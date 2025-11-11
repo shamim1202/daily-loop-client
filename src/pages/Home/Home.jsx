@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import FeaturedHabits from "../../components/FeaturedHabits/FeaturedHabits";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
-import Loading from "../../components/Loading/Loading";
+import WhyBuildHabits from "../../components/WhyBuildHabits/WhyBuildHabits";
 import { AuthContext } from "../../context/AuthProvider";
 
 const Home = () => {
@@ -11,6 +11,7 @@ const Home = () => {
         <div className="md:max-w-7xl mx-auto">
             <HeroSlider></HeroSlider>
             <FeaturedHabits></FeaturedHabits>
+            <WhyBuildHabits></WhyBuildHabits>
         </div>
     );
 };

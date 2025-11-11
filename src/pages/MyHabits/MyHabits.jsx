@@ -60,6 +60,7 @@ const MyHabits = () => {
     }
   };
 
+  // Delete habit button handler ----------------------------->
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -84,6 +85,66 @@ const MyHabits = () => {
             Swal.fire({
               icon: "error",
               title: "Failed to delete!",
+              text: "Please try again later.",
+            });
+          });
+      }
+    });
+  };
+
+  // Mark Complete Button Handler ----------------------------->
+  const handleMarkComplete = (id) => {
+    Swal.fire({
+      title: "Mark as Complete?",
+      text: "This will add today's completion to your streak.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, mark complete!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`http://localhost:3000/habits/complete/${id}`)
+          .then((res) => {
+            if (res.data.modifiedCount > 0) {
+              const today = new Date().toISOString().split("T")[0];
+              setHabits((prev) =>
+                prev.map((habit) => {
+                  if (habit._id === id) {
+                    const updatedHistory = habit.completionHistory || [];
+                    if (!updatedHistory.includes(today)) {
+                      updatedHistory.push(today);
+                    }
+                    return {
+                      ...habit,
+                      completionHistory: updatedHistory,
+                      currentStreak: (habit.currentStreak || 0) + 1,
+                    };
+                  }
+                  return habit;
+                })
+              );
+
+              Swal.fire({
+                icon: "success",
+                title: "Habit marked complete!",
+                text: "Great job keeping your streak alive 🔥",
+                timer: 2000,
+                showConfirmButton: false,
+              });
+            } else if (res.data.message === "Already marked complete today") {
+              Swal.fire({
+                icon: "info",
+                title: "Already completed today!",
+                timer: 2000,
+                showConfirmButton: false,
+              });
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            Swal.fire({
+              icon: "error",
+              title: "Failed to mark habit complete",
               text: "Please try again later.",
             });
           });
@@ -156,7 +217,7 @@ const MyHabits = () => {
                     {new Date(habit.createdAt).toLocaleDateString()}
                   </td>
                   <td className="py-3 px-4 space-x-2">
-                    {/* 🆕 Update Button */}
+                    {/* ----------- Update Button ----------- */}
                     <button
                       onClick={() => handleUpdateClick(habit)}
                       className="btn btn-xs md:btn-sm btn-outline btn-primary"
@@ -164,6 +225,7 @@ const MyHabits = () => {
                       Update
                     </button>
 
+                    {/* ----------- Delete Button ------------ */}
                     <button
                       onClick={() => handleDelete(habit._id)}
                       className="btn btn-xs md:btn-sm btn-outline btn-error hover:text-white"
@@ -171,15 +233,25 @@ const MyHabits = () => {
                       Delete
                     </button>
 
+                    {/* --------- Mark Complete Button -------- */}
                     <button
-                      className={`btn btn-xs md:btn-sm hover:text-white ${
-                        habit.completed
-                          ? "btn-success cursor-not-allowed opacity-60"
-                          : "btn-outline btn-success"
+                      onClick={() => handleMarkComplete(habit._id)}
+                      disabled={habit.completionHistory?.includes(
+                        new Date().toISOString().split("T")[0]
+                      )}
+                      className={`btn btn-xs md:btn-sm w-28 text-white transition-all duration-300 ${
+                        habit.completionHistory?.includes(
+                          new Date().toISOString().split("T")[0]
+                        )
+                          ? "bg-secondary text-white cursor-not-allowed"
+                          : "btn-outline btn-success hover:text-white"
                       }`}
-                      disabled={habit.completed}
                     >
-                      {habit.completed ? "Completed" : "Mark Complete"}
+                      {habit.completionHistory?.includes(
+                        new Date().toISOString().split("T")[0]
+                      )
+                        ? "Completed"
+                        : "Mark Complete"}
                     </button>
                   </td>
                 </tr>

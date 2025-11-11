@@ -2,6 +2,7 @@ import { useContext } from "react";
 import FeaturedHabits from "../../components/FeaturedHabits/FeaturedHabits";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
+import TestimonialCarousel from "../../components/TestimonialCarousel/TestimonialCarousel";
 import WhyBuildHabits from "../../components/WhyBuildHabits/WhyBuildHabits";
 import { AuthContext } from "../../context/AuthProvider";
 
@@ -14,6 +15,7 @@ const Home = () => {
             <FeaturedHabits></FeaturedHabits>
             <WhyBuildHabits></WhyBuildHabits>
             <HowItWorks></HowItWorks>
+            <TestimonialCarousel></TestimonialCarousel>
         </div>
     );
 };

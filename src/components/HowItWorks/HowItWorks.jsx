@@ -38,7 +38,7 @@ const HowItWorks = () => {
       {/* Header */}
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-5xl font-bold text-secondary">
-          How It Works
+          Daily Loop Workflow
         </h2>
         <p className="text-gray-600 mt-4 text-lg md:text-xl">
           Follow these 4 simple steps to start building your daily habit loop.

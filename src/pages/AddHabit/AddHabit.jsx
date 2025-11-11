@@ -61,7 +61,7 @@ const AddHabit = () => {
   return (
     <div className="md:max-w-7xl mx-auto min-h-screen bg-linear-to-r from-blue-100 via-purple-100 to-green-100 flex justify-center items-center py-6 md:py-14">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
-        <h1 className="text-2xl md:text-5xl font-bold text-center text-secondary mb-8">
+        <h1 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-8">
           Add A New Habit
         </h1>
 

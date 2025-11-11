@@ -6,6 +6,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import MyHabits from "../pages/MyHabits/MyHabits";
+import PublicHabits from "../pages/PublicHabits/PublicHabits";
 import Register from "../pages/Register/Register";
 import ViewDetails from "../pages/ViewDetails/ViewDetails";
 
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "public_habits",
-        element: <h1>Public Habits</h1>,
+        element: <PublicHabits></PublicHabits>,
       },
       {
         path: "my_habits",

@@ -11,8 +11,8 @@ const Home = () => {
       <HeroSlider></HeroSlider>
       <FeaturedHabits></FeaturedHabits>
       <WhyBuildHabits></WhyBuildHabits>
-      <HowItWorks></HowItWorks>
       <TestimonialCarousel></TestimonialCarousel>
+      <HowItWorks></HowItWorks>
       <MiniLeaderboard></MiniLeaderboard>
     </div>
   );

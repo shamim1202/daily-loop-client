@@ -85,11 +85,11 @@ const Login = () => {
     <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100">
       <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-center">
         <div className="py-4 md:py-12 flex md:flex-1 flex-col items-center justify-center px-4 md:rounded">
-          {/* ---- Login Card ---- */}
-          <div className="card w-full max-w-md shadow-xl hover:shadow-2xl transition-all duration-300">
+          {/* ----------- Login Card ------------- */}
+          <div className="card w-full max-w-md shadow-xl hover:shadow-2xl transition-all duration-300 pb-5 md:pb-0">
             {/* {loading && <loading></loading> } */}
             {/* ---- Title ---- */}
-            <h1 className="text-primary text-lg md:text-4xl font-bold mt-4 md:mt-6 text-center">
+            <h1 className="text-primary text-2xl md:text-4xl font-bold mt-2 md:mt-6 text-center">
               Login to Your Account
             </h1>
 

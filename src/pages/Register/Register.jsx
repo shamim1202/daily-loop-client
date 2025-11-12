@@ -6,7 +6,6 @@ import { AuthContext } from "../../context/AuthProvider";
 
 const Register = () => {
   const {
-    user,
     createUser,
     setUser,
     updateUser,
@@ -26,6 +25,28 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+    // ------------> Password Validation ---------------->
+    const errors = [];
+    if (!/[A-Z]/.test(password))
+      errors.push("Password must have at least one uppercase letter.");
+    if (!/[a-z]/.test(password))
+      errors.push("Password must have at least one lowercase letter.");
+    if (password.length < 6)
+      errors.push("Password must be at least 6 characters long.");
+
+    if (errors.length > 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Validation Error",
+        html: errors.map((err) => `• ${err}`).join("<br/>"),
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 4000,
+      });
+      return;
+    }
+
+    // --- Firebase Registration ---
     createUser(email, password)
       .then((result) => {
         const user = result.user;
@@ -109,10 +130,10 @@ const Register = () => {
         </div>
 
         <div className="py-4 md:py-12 flex md:flex-1 flex-col items-center justify-center px-4 md:rounded">
-          <div className="card w-full max-w-md shadow-xl hover:shadow-2xl transition-all duration-300">
+          <div className="card w-full max-w-md shadow-xl hover:shadow-2xl transition-all duration-300 pb-5 md:pb-0">
             {/* {loading && <loading></loading> } */}
             {/* ---- Title ---- */}
-            <h1 className="text-secondary text-lg md:text-4xl font-bold mt-4 md:mt-6 text-center">
+            <h1 className="text-secondary text-2xl md:text-4xl font-bold mt-4 md:mt-6 text-center">
               Register Your Account
             </h1>
 
@@ -123,8 +144,6 @@ const Register = () => {
                 <input
                   type="name"
                   name="name"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered w-full text-xs md:text-sm"
                   placeholder="Your Name"
                   required
@@ -135,8 +154,6 @@ const Register = () => {
                 <input
                   type="email"
                   name="email"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered w-full text-xs md:text-sm"
                   placeholder="Email"
                   required
@@ -147,8 +164,6 @@ const Register = () => {
                 <input
                   type="text"
                   name="photo_url"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered w-full text-xs md:text-sm"
                   placeholder="Photo Url"
                   required

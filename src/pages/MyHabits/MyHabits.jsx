@@ -211,17 +211,17 @@ const MyHabits = () => {
   };
 
   return (
-    <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100 md:px-10 py-10 relative">
+    <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100 px-6 md:px-12 py-10 relative">
       {showConfetti && <ConfettiEmoji />}
 
-      <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-8">
-        📋 My Habits
+      <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
+        My Habits
       </h2>
 
       {pageLoading || loading ? (
         <Loading />
       ) : habits.length === 0 ? (
-        <p className="text-center text-gray-500 text-lg">
+        <p className="text-center text-gray-500 md:text-lg">
           No habits found. Add one to get started!
         </p>
       ) : (
@@ -234,11 +234,11 @@ const MyHabits = () => {
           <table className="table w-full text-center border-collapse">
             <thead className="bg-secondary text-white">
               <tr>
-                <th className="py-3 px-4">Title</th>
-                <th className="py-3 px-4">Category</th>
-                <th className="py-3 px-4">Current Streak</th>
-                <th className="py-3 px-4">Created Date</th>
-                <th className="py-3 px-4">Actions</th>
+                <th className="text-sm md:text-base font-semibold py-1.5 px-2 md:py-3 md:px-4">Title</th>
+                <th className="text-sm md:text-base font-semibold py-1.5 px-2 md:py-3 md:px-4">Category</th>
+                <th className="text-sm md:text-base font-semibold py-1.5 px-2 md:py-3 md:px-4">Current Streak</th>
+                <th className="text-sm md:text-base font-semibold py-1.5 px-2 md:py-3 md:px-4">Created Date</th>
+                <th className="text-sm md:text-base font-semibold py-1.5 px-2 md:py-3 md:px-4">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -256,17 +256,17 @@ const MyHabits = () => {
                       i % 2 === 0 ? "bg-gray-50" : "bg-white"
                     } hover:bg-gray-100 transition`}
                   >
-                    <td className="py-3 px-4 font-medium text-primary">
+                    <td className="md:text-base text-xs md:py-3 md:px-4 font-medium text-primary">
                       {habit.title}
                     </td>
-                    <td className="py-3 px-4">{habit.category}</td>
-                    <td className="py-3 px-4 text-secondary font-semibold">
+                    <td className="md:text-base text-xs py-1.5 px-2 md:py-3 md:px-4 text-gray-600">{habit.category}</td>
+                    <td className="md:text-base text-xs py-1.5 px-2 md:py-3 md:px-4 text-secondary font-semibold">
                       {habit.currentStreak || 0}
                     </td>
-                    <td className="py-3 px-4 text-gray-600">
+                    <td className="md:text-base text-xs py-1.5 px-2 md:py-3 md:px-4 text-gray-600">
                       {new Date(habit.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="py-3 px-4 space-y-1 md:space-y-0 md:space-x-2">
+                    <td className="py-1.5 px-2 md:py-3 md:px-4 space-y-1 md:space-y-0 md:space-x-2">
                       <button
                         onClick={() => handleMarkComplete(habit._id)}
                         disabled={completedToday}

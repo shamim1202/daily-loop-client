@@ -26,8 +26,8 @@ const Leaderboard = () => {
   });
 
   return (
-    <div className="py-10">
-      <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-6 md:mb-10">
+    <div className="px-6 md:px-12 mb-8 md:mb-14 pb-10 md:pb-16">
+      <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
         Top 3 Habit Champions
       </h2>
 

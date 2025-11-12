@@ -70,7 +70,7 @@ const HeroSlider = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.7 }}
-              className="text-2xl md:text-5xl font-bold mb-4"
+              className="text-2xl md:text-4xl font-bold mb-4"
             >
               <Typewriter
                 words={[slides[current].title]}
@@ -95,12 +95,12 @@ const HeroSlider = () => {
       </AnimatePresence>
 
       {/* Navigation Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-2 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${
+            className={`w-1.5 h-1.5 md:w-3 md:h-3 rounded-full transition-all ${
               current === index ? "bg-white scale-125" : "bg-gray-400"
             }`}
           ></button>

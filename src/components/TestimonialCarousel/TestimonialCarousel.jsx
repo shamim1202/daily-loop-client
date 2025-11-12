@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 const testimonials = [
   {
@@ -56,11 +57,10 @@ const TestimonialCarousel = () => {
   };
 
   return (
-    <section className="max-w-5xl mx-auto px-6 py-10">
-      <h2 className="text-3xl md:text-5xl text-secondary font-bold text-center mb-12">
+    <section className="md:max-w-5xl mx-auto px-6 md:px-12">
+      <h2 className="text-2xl md:text-4xl text-secondary font-bold text-center mb-4 md:mb-7">
         What Our Users Say
       </h2>
-
       <div
         ref={carouselRef}
         className="relative w-full flex justify-center items-center min-h-48 md:min-h-72"
@@ -83,8 +83,8 @@ const TestimonialCarousel = () => {
               initial={false}
               animate={{
                 zIndex: isMain ? 20 : 10,
-                scale: isMain ? 1 : window.innerWidth < 768 ? 0.6 : 0.8,
-                x: position * (window.innerWidth < 768 ? 80 : 180),
+                scale: isMain ? 1 : window.innerWidth < 768 ? 0.5 : 0.8,
+                x: position * (window.innerWidth < 768 ? 70 : 180),
                 opacity: Math.abs(position) > 1 ? 0 : 1,
                 rotateY: position * 10,
               }}
@@ -109,15 +109,15 @@ const TestimonialCarousel = () => {
         {/* Navigation */}
         <button
           onClick={prev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-500 text-white w-6 h-6 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition z-30"
+          className="absolute left-0 top-1/2 -translate-y-1/2 bg-primary text-white w-6 h-6 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition z-30"
         >
-          ‹
+          <FaArrowLeft />
         </button>
         <button
           onClick={next}
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 text-white w-6 h-6 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition z-30"
+          className="absolute right-0 top-1/2 -translate-y-1/2 bg-primary text-white w-6 h-6 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition z-30"
         >
-          ›
+          <FaArrowRight />
         </button>
       </div>
     </section>

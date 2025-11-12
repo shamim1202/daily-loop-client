@@ -44,15 +44,15 @@ const FeaturedHabits = () => {
   }, [setLoading]);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
-      <h2 className="text-3xl md:text-5xl font-bold text-center text-secondary mb-8">
+    <div className="px-6 md:px-12">
+      <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
         Featured Habits
       </h2>
 
       {loading ? (
         <p className="text-center text-gray-500 text-lg">Loading habits...</p>
       ) : habits.length === 0 ? (
-        <p className="text-center text-gray-500 text-lg">
+        <p className="text-center text-gray-500 text-sm md:text-lg">
           No habits added yet.
         </p>
       ) : (
@@ -75,10 +75,10 @@ const FeaturedHabits = () => {
               </div>
 
               <div className="p-4">
-                <h3 className="text-xl font-semibold text-primary mb-2">
+                <h3 className="md:text-xl font-semibold text-primary mb-2">
                   {habit.title}
                 </h3>
-                <p className="text-gray-600 text-sm mb-3 line-clamp-2 md:h-10">
+                <p className="text-gray-600 text-sm md:text-base mb-3 line-clamp-2 md:h-12">
                   {habit.description}
                 </p>
 

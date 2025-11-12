@@ -131,7 +131,7 @@ const Navbar = () => {
                 className="rounded-full w-10 md:w-14 border-2 border-transparent hover:border-secondary transition focus:outline-none"
               >
                 <img
-                  src={user?.photoURL || "https://i.ibb.co/YW7tYpT/user.png"}
+                  src={user?.photoURL || user?.displayName}
                   alt="User Avatar"
                   className="rounded-full w-full h-full"
                 />
@@ -150,10 +150,10 @@ const Navbar = () => {
                     className="absolute right-0 top-16 w-56 bg-white border border-gray-200 rounded-xl shadow-lg z-50 focus:outline-none"
                   >
                     <div className="p-4 border-b">
-                      <p className="font-semibold text-gray-800">
+                      <p className="text-sm md:text-base font-semibold text-primary">
                         {user.displayName || "No Name"}
                       </p>
-                      <p className="text-sm text-gray-500 truncate">
+                      <p className="text-xs md:text-sm text-gray-500 truncate">
                         {user.email}
                       </p>
                     </div>

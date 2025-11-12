@@ -1,3 +1,4 @@
+import axios from "axios";
 import { motion } from "framer-motion";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
@@ -31,12 +32,60 @@ const PublicHabits = () => {
     }
   };
 
+  // ----------------- Mark Complete -----------------
+  // const handleMarkComplete = async (habitId) => {
+  //   if (!user?.email) {
+  //     Swal.fire({
+  //       title: "Login Required",
+  //       text: "You need to log in to mark this habit complete.",
+  //       icon: "warning",
+  //       confirmButtonText: "OK",
+  //     });
+  //     return;
+  //   }
+
+  //   try {
+  //     const res = await axios.patch(`http://localhost:3000/habits/complete/${habitId}`, {
+  //       email: user.email,
+  //     });
+
+  //     if (res.data.message === "Already marked complete today") {
+  //       Swal.fire({ icon: "info", title: "Already completed today!", timer: 1500, showConfirmButton: false });
+  //       return;
+  //     }
+
+  //     const today = res.data.today; // backend থেকে আজকের date
+  //     const userEmail = res.data.userEmail;
+
+  //     // Update habits state
+  //     setHabits((prev) =>
+  //       prev.map((habit) => {
+  //         if (habit._id === habitId) {
+  //           const updatedHistory = habit.completionHistory ? [...habit.completionHistory] : [];
+  //           updatedHistory.push({ userEmail, date: today });
+  //           return {
+  //             ...habit,
+  //             completionHistory: updatedHistory,
+  //             currentStreak: updatedHistory.filter((h) => h.userEmail === user.email).length, // শুধুমাত্র এই user এর streak
+  //           };
+  //         }
+  //         return habit;
+  //       })
+  //     );
+
+  //     Swal.fire({ icon: "success", title: "Marked complete! 🔥", timer: 1500, showConfirmButton: false });
+  //   } catch (err) {
+  //     console.error(err);
+  //     Swal.fire({ icon: "error", title: "Failed to mark complete", text: "Please try again later." });
+  //   }
+  // };
+
+  // ----------------- Fetch Habits -----------------
   useEffect(() => {
     const fetchHabits = async () => {
       try {
-        const res = await fetch("http://localhost:3000/public_habits");
-        const data = await res.json();
-        setHabits(data);
+        const res = await axios.get("http://localhost:3000/public_habits");
+        setHabits(res.data);
       } catch (error) {
         console.error("Error fetching habits:", error);
       } finally {
@@ -48,18 +97,13 @@ const PublicHabits = () => {
 
   const filteredHabits = useMemo(() => {
     return habits.filter((habit) => {
-      const matchesCategory =
-        selectedCategory === "All" || habit.category === selectedCategory;
-
+      const matchesCategory = selectedCategory === "All" || habit.category === selectedCategory;
       const matchesSearch =
         habit.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         habit.description?.toLowerCase().includes(searchTerm.toLowerCase());
-
       return matchesCategory && matchesSearch;
     });
   }, [habits, selectedCategory, searchTerm]);
-
-  // if (loading) return <div className="text-center mt-10">Loading...</div>;
 
   const categories = ["All", "Morning", "Work", "Fitness", "Evening", "Study"];
 
@@ -71,9 +115,7 @@ const PublicHabits = () => {
         transition={{ duration: 0.6 }}
         className="p-4 md:p-8"
       >
-        <h1 className="text-2xl md:text-4xl font-bold mb-6 text-center text-gray-800">
-          🌿 Public Habits
-        </h1>
+        <h1 className="text-2xl md:text-4xl font-bold mb-6 text-center text-gray-800">🌿 Public Habits</h1>
 
         {/* Search & Filter */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
@@ -120,36 +162,32 @@ const PublicHabits = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredHabits.map((habit, i) => (
-                <tr
-                  key={habit._id}
-                  className={`${
-                    i % 2 === 0 ? "bg-gray-50" : "bg-white"
-                  } hover:bg-gray-100 transition`}
-                >
-                  <td className="py-3 px-4 font-medium text-gray-700">
-                    {habit.userName || "Anonymous"}
-                  </td>
-                  <td className="py-3 px-4 font-medium text-blue-600">
-                    {habit.title}
-                  </td>
-                  <td className="py-3 px-4">{habit.category}</td>
-                  <td className="py-3 px-4 font-semibold text-gray-800">
-                    {habit.currentStreak || 0}
-                  </td>
-                  <td className="py-3 px-4 text-gray-600">
-                    {new Date(habit.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="py-3 px-4">
-                    <button
-                      onClick={() => handleViewDetails(habit._id)}
-                      className="btn btn-xs md:btn-sm btn-outline btn-primary text-primary hover:text-white rounded-lg transition"
-                    >
-                      See Details
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {filteredHabits.map((habit, i) => {
+                const completedToday = habit.completionHistory?.some(
+                  (entry) => entry.userEmail === user?.email && entry.date === new Date().toISOString().split("T")[0]
+                );
+                const userStreak = habit.completionHistory
+                  ? habit.completionHistory.filter((h) => h.userEmail === user?.email).length
+                  : 0;
+
+                return (
+                  <tr key={habit._id} className={`${i % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition`}>
+                    <td className="py-3 px-4 font-medium text-gray-700">{habit.userName || "Anonymous"}</td>
+                    <td className="py-3 px-4 font-medium text-blue-600">{habit.title}</td>
+                    <td className="py-3 px-4">{habit.category}</td>
+                    <td className="py-3 px-4 font-semibold text-gray-800">{userStreak}</td>
+                    <td className="py-3 px-4 text-gray-600">{new Date(habit.createdAt).toLocaleDateString()}</td>
+                    <td className="py-3 px-4">
+                      <button
+                        onClick={() => handleViewDetails(habit._id)}
+                        className="btn btn-xs md:btn-sm btn-outline btn-primary text-primary hover:text-white rounded-lg transition"
+                      >
+                        See Details
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </motion.div>

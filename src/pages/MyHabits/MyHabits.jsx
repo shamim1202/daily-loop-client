@@ -6,7 +6,7 @@ import Loading from "../../components/Loading/Loading";
 import { AuthContext } from "../../context/AuthProvider";
 
 const MyHabits = () => {
-  const { user, loading, setLoading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [pageLoading, setPageLoading] = useState(true);
   const [habits, setHabits] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,16 +92,14 @@ const MyHabits = () => {
     }
   };
 
-  // Mark habit complete
+  // Mark habit complete (Persistent & Streak Update)
   const handleMarkComplete = async (habitId) => {
     if (!user?.email) return;
 
     try {
       const res = await axios.patch(
         `http://localhost:3000/habits/complete/${habitId}`,
-        {
-          email: user.email,
-        }
+        { email: user.email }
       );
 
       if (res.data.message === "Already marked complete today") {
@@ -114,20 +112,22 @@ const MyHabits = () => {
         return;
       }
 
-      const today = res.data.today;
-      const userEmail = res.data.userEmail;
-
+      // Update frontend state using backend response
       setHabits((prev) =>
         prev.map((habit) => {
           if (habit._id === habitId) {
             const updatedHistory = habit.completionHistory
               ? [...habit.completionHistory]
               : [];
-            updatedHistory.push({ userEmail, date: today });
+            updatedHistory.push({
+              userEmail: user.email,
+              date: res.data.today,
+            });
+
             return {
               ...habit,
               completionHistory: updatedHistory,
-              currentStreak: (habit.currentStreak || 0) + 1, // optimistic UI
+              currentStreak: res.data.currentStreak, // backend computed streak
             };
           }
           return habit;
@@ -154,51 +154,35 @@ const MyHabits = () => {
   };
 
   // Fetch user habits
-  // useEffect(() => {
-  //   if (!user?.email) return;
-  //   setLoading(true);
-  //   axios
-  //     .get(`http://localhost:3000/my_habits?email=${user.email}`)
-  //     .then((res) => setHabits(res.data))
-  //     .catch((err) => {
-  //       console.error(err);
-  //       Swal.fire({ icon: "error", title: "Failed to load habits!", text: "Try again later." });
-  //     })
-  //     .finally(() => setLoading(false));
-  // }, [user,setLoading]);
-
   useEffect(() => {
-    // If user is not logged in, skip fetching
     if (!user?.email) {
-      setPageLoading(false); // stop local loading
+      setPageLoading(false);
       return;
     }
 
     const fetchHabits = async () => {
       try {
-        setPageLoading(true); // start local loading
-
+        setPageLoading(true);
         const res = await axios.get(
           `http://localhost:3000/my_habits?email=${user.email}`
         );
-
-        setHabits(res.data); // set fetched habits
+        setHabits(res.data); // Ensure currentStreak & completionHistory included
       } catch (err) {
-        console.error("Error fetching habits:", err);
+        console.error(err);
         Swal.fire({
           icon: "error",
           title: "Failed to load habits!",
           text: "Please try again later.",
         });
       } finally {
-        setPageLoading(false); // stop local loading
+        setPageLoading(false);
       }
     };
 
     fetchHabits();
-  }, [user?.email]); // run effect only when user email changes
+  }, [user?.email]);
 
-  // Emoji confetti
+  // Emoji Confetti
   const ConfettiEmoji = () => {
     const emojis = Array.from({ length: 30 });
     return (
@@ -234,7 +218,7 @@ const MyHabits = () => {
         📋 My Habits
       </h2>
 
-      {loading ? (
+      {pageLoading || loading ? (
         <Loading />
       ) : habits.length === 0 ? (
         <p className="text-center text-gray-500 text-lg">

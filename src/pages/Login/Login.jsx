@@ -55,6 +55,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        console.log(user)
         Swal.fire({
           position: "top-end",
           icon: "success",

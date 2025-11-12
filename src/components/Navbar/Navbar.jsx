@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider";
 
@@ -10,6 +10,7 @@ const Navbar = () => {
   const { user, signOutUser, loading, setLoading } = useContext(AuthContext);
   const [Open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Navigation Bar Toggle Class
   const navLinkClass = ({ isActive }) =>
@@ -49,6 +50,7 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     signOutUser()
+    console.log(user)
       .then(() => {
         Swal.fire({
           position: "top-end",
@@ -129,7 +131,7 @@ const Navbar = () => {
                 className="rounded-full w-10 md:w-14 border-2 border-transparent hover:border-secondary transition focus:outline-none"
               >
                 <img
-                  src={user.photoURL || "https://i.ibb.co/YW7tYpT/user.png"}
+                  src={user?.photoURL || "https://i.ibb.co/YW7tYpT/user.png"}
                   alt="User Avatar"
                   className="rounded-full w-full h-full"
                 />

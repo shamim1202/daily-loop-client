@@ -56,7 +56,7 @@ const TestimonialCarousel = () => {
   };
 
   return (
-    <section className="max-w-5xl mx-auto px-6 py-16">
+    <section className="max-w-5xl mx-auto px-6 py-16 md:mb-14">
       <h2 className="text-3xl md:text-5xl text-secondary font-bold text-center mb-12">
         What Our Users Say
       </h2>

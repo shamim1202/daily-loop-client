@@ -1,13 +1,35 @@
 import { motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthProvider";
 
 const PublicHabits = () => {
   const [habits, setHabits] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { user, loading, setLoading } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const navigate = useNavigate();
+
+  const handleViewDetails = (habitId) => {
+    if (!user) {
+      Swal.fire({
+        title: "Login Required",
+        text: "You need to log in to view habit details.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Go to Login",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#3B82F6",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/auth/login");
+        }
+      });
+    } else {
+      navigate(`/habit_details/${habitId}`);
+    }
+  };
 
   useEffect(() => {
     const fetchHabits = async () => {
@@ -22,7 +44,7 @@ const PublicHabits = () => {
       }
     };
     fetchHabits();
-  }, []);
+  }, [setLoading]);
 
   const filteredHabits = useMemo(() => {
     return habits.filter((habit) => {
@@ -37,7 +59,7 @@ const PublicHabits = () => {
     });
   }, [habits, selectedCategory, searchTerm]);
 
-  if (loading) return <div className="text-center mt-10">Loading...</div>;
+  // if (loading) return <div className="text-center mt-10">Loading...</div>;
 
   const categories = ["All", "Morning", "Work", "Fitness", "Evening", "Study"];
 
@@ -120,7 +142,7 @@ const PublicHabits = () => {
                   </td>
                   <td className="py-3 px-4">
                     <button
-                      onClick={() => navigate(`/habit_details/${habit._id}`)}
+                      onClick={() => handleViewDetails(habit._id)}
                       className="btn btn-xs md:btn-sm btn-outline btn-primary text-primary hover:text-white rounded-lg transition"
                     >
                       See Details

@@ -9,6 +9,7 @@ import MyHabits from "../pages/MyHabits/MyHabits";
 import PublicHabits from "../pages/PublicHabits/PublicHabits";
 import Register from "../pages/Register/Register";
 import ViewDetails from "../pages/ViewDetails/ViewDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,15 +26,27 @@ const router = createBrowserRouter([
       },
       {
         path: "my_habits",
-        element: <MyHabits></MyHabits>,
+        element: (
+          <PrivateRoute>
+            <MyHabits></MyHabits>
+          </PrivateRoute>
+        ),
       },
       {
         path: "add_habit",
-        element: <AddHabit></AddHabit>,
+        element: (
+          <PrivateRoute>
+            <AddHabit></AddHabit>
+          </PrivateRoute>
+        ),
       },
       {
         path: "habit_details/:id",
-        element: <ViewDetails></ViewDetails>,
+        element: (
+          <PrivateRoute>
+            <ViewDetails></ViewDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },

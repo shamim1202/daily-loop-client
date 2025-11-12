@@ -30,17 +30,20 @@ const Navbar = () => {
           Public Habits
         </NavLink>
       </li>
-
-      <li>
-        <NavLink to="/my_habits" className={navLinkClass}>
-          My Habits
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/add_habit" className={navLinkClass}>
-          Add Habit
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/my_habits" className={navLinkClass}>
+              My Habits
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/add_habit" className={navLinkClass}>
+              Add Habit
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 

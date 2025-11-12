@@ -1,6 +1,7 @@
 import FeaturedHabits from "../../components/FeaturedHabits/FeaturedHabits";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
+import MiniLeaderboard from "../../components/MiniLeaderboard/MiniLeaderboard";
 import TestimonialCarousel from "../../components/TestimonialCarousel/TestimonialCarousel";
 import WhyBuildHabits from "../../components/WhyBuildHabits/WhyBuildHabits";
 
@@ -12,6 +13,7 @@ const Home = () => {
       <WhyBuildHabits></WhyBuildHabits>
       <HowItWorks></HowItWorks>
       <TestimonialCarousel></TestimonialCarousel>
+      <MiniLeaderboard></MiniLeaderboard>
     </div>
   );
 };

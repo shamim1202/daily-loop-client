@@ -84,7 +84,7 @@ const FeaturedHabits = () => {
 
                 <div className="flex justify-between items-center text-xs md:text-sm text-gray-500 mb-2">
                   <p>
-                    <span className="font-semibold">By</span> {habit.userName}
+                    <span className="text-gray-700 font-semibold">By :</span> {habit.userName}
                   </p>
                 </div>
                 <button

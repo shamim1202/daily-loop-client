@@ -32,7 +32,6 @@ const ViewDetails = () => {
   if (loadingHabit) return <p className="text-center mt-10">Loading Habit Details...</p>;
   if (!habit) return null;
 
-  // ------------------------------
   // Filter completions for current user
   const userCompletions = habit.completionHistory?.filter(
     (entry) => entry.userEmail === user?.email
@@ -133,39 +132,39 @@ const ViewDetails = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 bg-linear-to-r from-blue-100 via-purple-100 to-green-100">
-      <button onClick={() => navigate(-1)} className="btn btn-outline btn-primary btn-xs md:btn-sm mb-6">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 bg-linear-to-r from-blue-100 via-purple-100 to-green-100">
+      <button onClick={() => navigate(-1)} className="btn btn-outline btn-primary btn-xs md:btn-sm mb-3 md:mb-6">
         ← Back
       </button>
 
       {showConfetti && <ConfettiEmoji />}
 
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-        className="bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row gap-6">
+        className="bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row md:gap-6">
         
-        {/* Image */}
-        <div className="md:w-1/2 h-64 md:h-auto">
-          <img src={habit.imageUrl || "https://via.placeholder.com/600x400"} alt={habit.title} className="w-full h-full object-cover rounded-l-2xl" />
+        {/*-------------- Image ---------------*/}
+        <div className="md:w-1/2 h-52 md:h-auto">
+          <img src={habit.imageUrl || habit.title} alt={habit.title} className="w-full h-full object-cover rounded-t-2xl md:rounded-t-none md:rounded-l-2xl" />
         </div>
 
         {/* Details */}
-        <div className="md:w-1/2 p-6 flex flex-col justify-between">
+        <div className="md:w-1/2 p-4 md:p-6 flex flex-col justify-between">
           <div>
-            <h1 className="text-xl md:text-3xl font-bold text-primary mb-2">{habit.title}</h1>
-            <p className="text-gray-700 mb-4">{habit.description}</p>
-            <p className="mb-2"><span className="font-semibold">Category:</span> {habit.category}</p>
-            <p className="mb-2"><span className="font-semibold">Created by:</span> {habit.userName}</p>
+            <h3 className="md:text-xl font-semibold text-primary mb-2">{habit.title}</h3>
+            <p className="text-gray-600 text-sm md:text-base mb-4">{habit.description}</p>
+            <p className="text-gray-600 text-sm md:text-base mb-2"><span className="font-semibold">Category:</span> {habit.category}</p>
+            <p className="text-gray-600 text-sm md:text-base mb-2"><span className="font-semibold">Created by:</span> {habit.userName}</p>
 
             {/* Progress bar */}
             <div className="mb-3">
               <div className="w-full bg-gray-200 h-3 rounded-full">
                 <div className="h-3 bg-secondary rounded-full transition-all duration-500" style={{ width: `${progress}%` }}></div>
               </div>
-              <p className="text-sm text-gray-500 mt-1">{progress}% completed (last 30 days)</p>
+              <p className="text-xs md:text-sm text-gray-500 mt-1">{progress}% completed (last 30 days)</p>
             </div>
 
             {/* Streak */}
-            <span className="bg-orange-500 text-white md:px-3 md:py-2 rounded-full text-sm font-medium">🔥 {streak} Day Streak</span>
+            <span className="bg-orange-500 text-white px-2 py-1 md:px-3 md:py-2 rounded-full text-xs md:text-sm font-medium">🔥 {streak} Day Streak</span>
           </div>
 
           {/* Mark Complete Button */}

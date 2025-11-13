@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth";
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDS3mSi4swJgLp3CVkHpWw9JhxR-m_wxG8",
-  authDomain: "daily-loop-auth.firebaseapp.com",
-  projectId: "daily-loop-auth",
-  storageBucket: "daily-loop-auth.firebasestorage.app",
-  messagingSenderId: "1000176471122",
-  appId: "1:1000176471122:web:f81ae6f3525505d3cd638b",
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
 };
 
 // Initialize Firebase

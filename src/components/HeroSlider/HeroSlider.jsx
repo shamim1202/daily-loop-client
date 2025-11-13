@@ -50,7 +50,7 @@ const HeroSlider = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden rounded shadow-xl my-8 md:my-14">
+    <div className="relative w-full h-[220px] md:h-[60vh] overflow-hidden rounded shadow-xl my-8 md:my-14">
       {loading ? (
         <Loading></Loading>
       ) : (
@@ -77,7 +77,7 @@ const HeroSlider = () => {
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.7 }}
-                  className="text-2xl md:text-4xl font-bold mb-4"
+                  className="text-3xl md:text-4xl font-bold mb-4"
                 >
                   <Typewriter
                     words={[slides[current].title]}

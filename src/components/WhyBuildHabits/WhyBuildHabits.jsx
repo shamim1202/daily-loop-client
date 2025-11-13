@@ -10,7 +10,7 @@ const WhyBuildHabits = () => {
         <Loading></Loading>
       ) : (
         <section>
-          <h2 className="text-2xl md:text-4xl font-bold text-secondary text-center mb-5 md:mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-secondary text-center mb-5 md:mb-8">
             🌱 Why Build Habits?
           </h2>
 
@@ -23,7 +23,7 @@ const WhyBuildHabits = () => {
                 className="w-1/4 md:w-1/3 rounded-2xl object-cover"
               />
               <div className="md:w-1/2 px-2 md:px-0 pb-2 md:pb-0">
-                <h3 className="text-primary md:text-xl font-semibold mb-3">
+                <h3 className="text-primary md:text-xl font-bold mb-3">
                   Build Consistency
                 </h3>
                 <blockquote className="text-sm md:text-base italic text-gray-800 border-l-2 md:border-l-4 border-primary pl-4">
@@ -41,7 +41,7 @@ const WhyBuildHabits = () => {
                 className="w-1/4 md:w-1/3 rounded-2xl object-cover"
               />
               <div className="md:w-1/2 px-2 md:px-0 pb-2 md:pb-0">
-                <h3 className="text-primary md:text-xl font-semibold mb-3">
+                <h3 className="text-primary md:text-xl font-bold mb-3">
                   Improve Productivity
                 </h3>
                 <blockquote className="text-sm md:text-base italic text-gray-800 border-l-2 md:border-l-4 border-primary pl-4">
@@ -59,7 +59,7 @@ const WhyBuildHabits = () => {
                 className="w-1/4 md:w-1/3 rounded-2xl object-cover"
               />
               <div className="md:w-1/2 px-2 md:px-0 pb-2 md:pb-0">
-                <h3 className="text-primary md:text-xl font-semibold mb-3">
+                <h3 className="text-primary md:text-xl font-bold mb-3">
                   Enhance Wellbeing
                 </h3>
                 <blockquote className="text-sm md:text-base italic text-gray-800 border-l-2 md:border-l-4 border-primary pl-4">
@@ -77,7 +77,7 @@ const WhyBuildHabits = () => {
                 className="w-1/4 md:w-1/3 rounded-2xl object-cover"
               />
               <div className="md:w-1/2 px-2 md:px-0 pb-2 md:pb-0">
-                <h3 className="text-primary md:text-xl font-semibold mb-3">
+                <h3 className="text-primary md:text-xl font-bold mb-3">
                   Track Your Progress
                 </h3>
                 <blockquote className="text-sm md:text-base italic text-gray-800 border-l-2 md:border-l-4 border-primary pl-4">

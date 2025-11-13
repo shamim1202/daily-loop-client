@@ -21,8 +21,8 @@ const Leaderboard = () => {
         <Loading></Loading>
       ) : (
         <section>
-          <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-8">
-            🏆 Top 3 Habit Champions
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
+            🏆 Top 3 Champions
           </h2>
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-5 md:gap-8">
@@ -30,7 +30,7 @@ const Leaderboard = () => {
               <motion.div
                 key={leader.userEmail}
                 whileHover={{ scale: 1.05 }}
-                className={`flex flex-col items-center bg-white shadow-lg rounded-2xl p-4 md:p-6 border border-gray-200 w-48 md:w-56 h-36 md:h-48 transition-all duration-300
+                className={`flex flex-col items-center bg-white shadow-lg rounded-2xl p-4 md:p-6 border border-gray-200 w-42 md:w-56 md:h-48 transition-all duration-300
               ${index === 0 ? "md:scale-110 z-10" : "opacity-90"}`}
               >
                 {/* Rank */}

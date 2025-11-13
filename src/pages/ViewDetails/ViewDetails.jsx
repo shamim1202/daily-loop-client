@@ -160,10 +160,10 @@ const ViewDetails = () => {
         {/* Details */}
         <div className="md:w-1/2 p-4 md:p-6 flex flex-col justify-between">
           <div>
-            <h3 className="md:text-xl font-semibold text-primary mb-2">{habit.title}</h3>
+            <h3 className="md:text-xl font-bold text-primary mb-2">{habit.title}</h3>
             <p className="text-gray-600 text-sm md:text-base mb-4">{habit.description}</p>
-            <p className="text-gray-600 text-sm md:text-base mb-2"><span className="font-semibold">Category:</span> {habit.category}</p>
-            <p className="text-gray-600 text-sm md:text-base mb-2"><span className="font-semibold">Created by:</span> {habit.userName}</p>
+            <p className="text-gray-600 text-sm md:text-base mb-2"><span className="font-bold">Category:</span> {habit.category}</p>
+            <p className="text-gray-600 text-sm md:text-base mb-2"><span className="font-bold">Created by:</span> {habit.userName}</p>
 
             {/* Progress bar */}
             <div className="mb-3">
@@ -174,7 +174,7 @@ const ViewDetails = () => {
             </div>
 
             {/* Streak */}
-            <span className="bg-orange-500 text-white px-2 py-1 md:px-3 md:py-2 rounded-full text-xs md:text-sm font-medium">🔥 {streak} Day Streak</span>
+            <span className="bg-orange-500 text-white px-2 py-1 md:px-3 md:py-2 rounded-full text-xs md:text-sm font-semibold">🔥 {streak} Day Streak</span>
           </div>
 
           {/* Mark Complete Button */}

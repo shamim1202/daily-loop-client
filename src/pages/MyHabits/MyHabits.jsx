@@ -217,7 +217,7 @@ const MyHabits = () => {
     <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100 px-6 md:px-12 py-10 relative">
       {showConfetti && <ConfettiEmoji />}
 
-      <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
         My Habits
       </h2>
 

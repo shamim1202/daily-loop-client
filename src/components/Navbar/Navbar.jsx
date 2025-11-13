@@ -116,7 +116,7 @@ const Navbar = () => {
               className="w-16 block md:hidden"
             />
           </Link>
-          <ul className="hidden md:flex items-center md:gap-4 md:text-lg">
+          <ul className="hidden md:flex items-center md:gap-4 md:text-lg font-medium md:font-semibold">
             {links}
           </ul>
         </div>

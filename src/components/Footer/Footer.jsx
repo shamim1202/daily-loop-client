@@ -11,8 +11,8 @@ const Footer = () => {
   return (
     <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100 px-6 md:px-12 py-6 md:py-0">
       <div className=" text-primary md:py-8">
-        <div className="md:max-w-7xl mx-auto flex flex-col-reverse md:flex-row md:gap-40 text-center md:text-left">
-          <div className="flex flex-col md:flex-row md:w-full justify-between space-y-3 md:space-y-0">
+        <div className="flex flex-col-reverse md:flex-row md:gap-40 text-center md:text-left">
+          <div className="flex flex-row md:w-full justify-between space-y-3 md:space-y-0">
             <nav>
               <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">
                 Services

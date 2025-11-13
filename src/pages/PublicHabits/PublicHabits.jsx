@@ -76,7 +76,7 @@ const PublicHabits = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-2xl md:text-4xl font-bold mb-5 md:mb-8 text-center text-primary">
+          <h1 className="text-3xl md:text-4xl font-bold mb-5 md:mb-8 text-center text-primary">
             Public Habits
           </h1>
 

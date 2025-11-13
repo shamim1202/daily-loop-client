@@ -45,7 +45,7 @@ const FeaturedHabits = () => {
 
   return (
     <div className="px-6 md:px-12">
-      <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
         🏅 Featured Habits
       </h2>
 
@@ -56,7 +56,7 @@ const FeaturedHabits = () => {
           No habits added yet.
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {habits.map((habit, i) => (
             <motion.div
               key={habit._id}
@@ -70,12 +70,12 @@ const FeaturedHabits = () => {
                 <img
                   src={habit.imageUrl || "No Image Found"}
                   alt={habit.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-36 md:h-48 object-cover"
                 />
               </div>
 
               <div className="p-4">
-                <h3 className="md:text-xl font-semibold text-primary mb-2">
+                <h3 className="md:text-xl font-bold text-primary mb-2">
                   {habit.title}
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base mb-3 line-clamp-2 md:h-12">

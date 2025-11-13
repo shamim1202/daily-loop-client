@@ -65,7 +65,7 @@ const TestimonialCarousel = () => {
         <Loading></Loading>
       ) : (
         <section>
-          <h2 className="text-2xl md:text-4xl text-secondary font-bold text-center mb-4 md:mb-7">
+          <h2 className="text-3xl md:text-4xl text-secondary font-bold text-center mb-3 md:mb-7">
             💬 What Our Users Say
           </h2>
           <div

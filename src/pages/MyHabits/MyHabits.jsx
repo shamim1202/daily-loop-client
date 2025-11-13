@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Loading from "../../components/Loading/Loading";
 import { AuthContext } from "../../context/AuthProvider";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const MyHabits = () => {
   const { user, loading } = useContext(AuthContext);
@@ -209,6 +210,8 @@ const MyHabits = () => {
       </div>
     );
   };
+
+  usePageTitle("My Habits")
 
   return (
     <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100 px-6 md:px-12 py-10 relative">

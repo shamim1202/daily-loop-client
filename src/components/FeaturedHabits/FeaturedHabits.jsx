@@ -35,7 +35,6 @@ const FeaturedHabits = () => {
       .get("http://localhost:3000/featured_habits")
       .then((data) => {
         const featuredItem = data.data;
-        console.log(featuredItem);
         setHabits(featuredItem);
       })
       .catch((err) => {

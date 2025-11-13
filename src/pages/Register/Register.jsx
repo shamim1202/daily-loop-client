@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import Loading from "../../components/Loading/Loading";
 import { AuthContext } from "../../context/AuthProvider";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const Register = () => {
   const { createUser, setUser, updateUser, googleSignIn, loading, setLoading } =
@@ -112,6 +113,8 @@ const Register = () => {
         });
       });
   };
+
+  usePageTitle("Register")
 
   return (
     <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100">

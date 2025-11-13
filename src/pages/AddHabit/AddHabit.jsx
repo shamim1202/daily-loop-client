@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const AddHabit = () => {
   const { user, loading, setLoading } = useContext(AuthContext);
@@ -57,6 +58,8 @@ const AddHabit = () => {
       setLoading(false);
     }
   };
+
+  usePageTitle("Add your habit")
 
   return (
     <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100 flex justify-center items-center px-6 md:px-12 py-10">

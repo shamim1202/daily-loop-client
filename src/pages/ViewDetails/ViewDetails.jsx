@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const ViewDetails = () => {
   const { id } = useParams();
@@ -29,6 +30,8 @@ const ViewDetails = () => {
     };
     fetchHabit();
   }, [id]);
+
+  usePageTitle(habit ? habit.title : "Habit Details");
 
   if (loadingHabit) return <p className="text-center mt-10">Loading Habit Details...</p>;
   if (!habit) return null;
@@ -136,6 +139,7 @@ const ViewDetails = () => {
       </div>
     );
   };
+
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 bg-linear-to-r from-blue-100 via-purple-100 to-green-100">

@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loading from "../../components/Loading/Loading";
 import { AuthContext } from "../../context/AuthProvider";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const Login = () => {
   const { user, setUser, signInUser, googleSignIn, loading, setLoading } =
@@ -56,7 +57,6 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
-        console.log(user);
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -79,6 +79,8 @@ const Login = () => {
         });
       });
   };
+
+  usePageTitle("Login")
 
   return (
     <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100">

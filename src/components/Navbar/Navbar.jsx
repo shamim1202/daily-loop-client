@@ -49,8 +49,9 @@ const Navbar = () => {
   );
 
   const handleLogOut = () => {
-    signOutUser()
-    console.log(user)
+    signOutUser();
+    console
+      .log(user)
       .then(() => {
         Swal.fire({
           position: "top-end",
@@ -123,10 +124,14 @@ const Navbar = () => {
 
         {/*--------> Navigation Bar End <---------- */}
         <div className="navbar-end">
-          {user ? (
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <span className="loading loading-spinner loading-sm"></span>
+            </div>
+          ) : user ? (
             <div className="flex items-center gap-2 md:gap-4">
               <button
-                tabIndex={0} // allows blur detection
+                tabIndex={0}
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="rounded-full w-10 md:w-14 border-2 border-transparent hover:border-secondary transition focus:outline-none"
               >
@@ -142,7 +147,7 @@ const Navbar = () => {
                   <motion.div
                     key="dropdown"
                     tabIndex={0}
-                    onBlur={() => setDropdownOpen(false)} // 💡 closes when focus is lost
+                    onBlur={() => setDropdownOpen(false)}
                     initial={{ opacity: 0, scale: 0.9, y: -5 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: -5 }}

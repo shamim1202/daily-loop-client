@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import FeaturedHabits from "../../components/FeaturedHabits/FeaturedHabits";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
@@ -6,14 +7,72 @@ import TestimonialCarousel from "../../components/TestimonialCarousel/Testimonia
 import WhyBuildHabits from "../../components/WhyBuildHabits/WhyBuildHabits";
 
 const Home = () => {
+  const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100 space-y-12 md:space-y-16">
-      <HeroSlider></HeroSlider>
-      <FeaturedHabits></FeaturedHabits>
-      <WhyBuildHabits></WhyBuildHabits>
-      <TestimonialCarousel></TestimonialCarousel>
-      <HowItWorks></HowItWorks>
-      <MiniLeaderboard></MiniLeaderboard>
+    <div className="md:max-w-7xl mx-auto bg-linear-to-r from-blue-100 via-purple-100 to-green-100 space-y-12 md:space-y-20">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+      >
+        <HeroSlider />
+      </motion.div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+      >
+        <FeaturedHabits />
+      </motion.div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <WhyBuildHabits />
+      </motion.div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        <TestimonialCarousel />
+      </motion.div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <HowItWorks />
+      </motion.div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <MiniLeaderboard />
+      </motion.div>
     </div>
   );
 };

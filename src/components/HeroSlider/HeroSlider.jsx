@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import { AuthContext } from "../../context/AuthProvider";
+import Loading from "../Loading/Loading";
 
 const slides = [
   {
@@ -37,6 +39,7 @@ const slides = [
 
 const HeroSlider = () => {
   const [current, setCurrent] = useState(0);
+  const { loading } = useContext(AuthContext);
 
   // Auto-slide every 8 seconds ------------------------>
   useEffect(() => {
@@ -47,65 +50,71 @@ const HeroSlider = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[50vh] md:h-[70vh] overflow-hidden rounded shadow-xl my-8 md:my-14">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={slides[current].id}
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.02 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-0 w-full h-full"
-        >
-          {/* Background Image */}
-          <img
-            src={slides[current].img}
-            alt={slides[current].title}
-            className="w-full h-full object-cover brightness-70"
-          />
-
-          {/* Overlay Text */}
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 bg-black/40">
-            <motion.h1
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              className="text-2xl md:text-4xl font-bold mb-4"
+    <div className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden rounded shadow-xl my-8 md:my-14">
+      {loading ? (
+        <Loading></Loading>
+      ) : (
+        <section>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slides[current].id}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full"
             >
-              <Typewriter
-                words={[slides[current].title]}
-                loop={false}
-                cursor
-                cursorStyle="_"
-                typeSpeed={80}
-                deleteSpeed={50}
+              {/* Background Image */}
+              <img
+                src={slides[current].img}
+                alt={slides[current].title}
+                className="w-full h-full object-cover brightness-70"
               />
-            </motion.h1>
 
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-sm md:text-base max-w-2xl"
-            >
-              {slides[current].desc}
-            </motion.p>
+              {/* Overlay Text */}
+              <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 bg-black/40">
+                <motion.h1
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.7 }}
+                  className="text-2xl md:text-4xl font-bold mb-4"
+                >
+                  <Typewriter
+                    words={[slides[current].title]}
+                    loop={false}
+                    cursor
+                    cursorStyle="_"
+                    typeSpeed={80}
+                    deleteSpeed={50}
+                  />
+                </motion.h1>
+
+                <motion.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                  className="text-sm md:text-base max-w-2xl"
+                >
+                  {slides[current].desc}
+                </motion.p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Dots */}
+          <div className="absolute bottom-2 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrent(index)}
+                className={`w-1.5 h-1.5 md:w-3 md:h-3 rounded-full transition-all ${
+                  current === index ? "bg-white scale-125" : "bg-gray-400"
+                }`}
+              ></button>
+            ))}
           </div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Navigation Dots */}
-      <div className="absolute bottom-2 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrent(index)}
-            className={`w-1.5 h-1.5 md:w-3 md:h-3 rounded-full transition-all ${
-              current === index ? "bg-white scale-125" : "bg-gray-400"
-            }`}
-          ></button>
-        ))}
-      </div>
+        </section>
+      )}
     </div>
   );
 };

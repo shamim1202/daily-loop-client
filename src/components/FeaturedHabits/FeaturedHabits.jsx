@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider";
+import Loading from "../Loading/Loading";
 
 const FeaturedHabits = () => {
   const { user, loading, setLoading } = useContext(AuthContext);
@@ -50,7 +51,7 @@ const FeaturedHabits = () => {
       </h2>
 
       {loading ? (
-        <p className="text-center text-gray-500 text-lg">Loading habits...</p>
+        <Loading></Loading>
       ) : habits.length === 0 ? (
         <p className="text-center text-gray-500 text-sm md:text-lg">
           No habits added yet.
@@ -84,7 +85,8 @@ const FeaturedHabits = () => {
 
                 <div className="flex justify-between items-center text-xs md:text-sm text-gray-500 mb-2">
                   <p>
-                    <span className="text-gray-700 font-semibold">By :</span> {habit.userName}
+                    <span className="text-gray-700 font-semibold">By :</span>{" "}
+                    {habit.userName}
                   </p>
                 </div>
                 <button

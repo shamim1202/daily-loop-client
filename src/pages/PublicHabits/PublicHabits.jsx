@@ -40,7 +40,7 @@ const PublicHabits = () => {
   useEffect(() => {
     const fetchHabits = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/public_habits");
+        const res = await axios.get("https://daily-loop-server.vercel.app/public_habits");
         setHabits(res.data);
       } catch (error) {
         console.error("Error fetching habits:", error);

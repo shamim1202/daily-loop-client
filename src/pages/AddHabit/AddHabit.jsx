@@ -23,7 +23,7 @@ const AddHabit = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/add_habit", {
+      const res = await fetch("https://daily-loop-server.vercel.app/add_habit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newHabit),

@@ -19,7 +19,7 @@ const ViewDetails = () => {
     const fetchHabit = async () => {
       setLoadingHabit(true);
       try {
-        const res = await axios.get(`http://localhost:3000/habits/${id}`);
+        const res = await axios.get(`https://daily-loop-server.vercel.app/habits/${id}`);
         setHabit(res.data);
       } catch (err) {
         console.error(err);
@@ -80,7 +80,7 @@ const ViewDetails = () => {
     }
 
     try {
-      const res = await axios.patch(`http://localhost:3000/habits/complete/${habit._id}`, {
+      const res = await axios.patch(`https://daily-loop-server.vercel.app/habits/complete/${habit._id}`, {
         email: user.email,
       });
 

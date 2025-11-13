@@ -33,7 +33,7 @@ const MyHabits = () => {
       };
 
       const res = await axios.patch(
-        `http://localhost:3000/update_habit/${selectedHabit._id}`,
+        `https://daily-loop-server.vercel.app/update_habit/${selectedHabit._id}`,
         updatedHabit
       );
 
@@ -76,7 +76,7 @@ const MyHabits = () => {
     if (result.isConfirmed) {
       try {
         const res = await axios.delete(
-          `http://localhost:3000/delete_habit/${id}`
+          `https://daily-loop-server.vercel.app/delete_habit/${id}`
         );
         if (res.data.deletedCount > 0) {
           setHabits((prev) => prev.filter((habit) => habit._id !== id));
@@ -99,7 +99,7 @@ const MyHabits = () => {
 
     try {
       const res = await axios.patch(
-        `http://localhost:3000/habits/complete/${habitId}`,
+        `https://daily-loop-server.vercel.app/habits/complete/${habitId}`,
         { email: user.email }
       );
 
@@ -165,7 +165,7 @@ const MyHabits = () => {
       try {
         setPageLoading(true);
         const res = await axios.get(
-          `http://localhost:3000/my_habits?email=${user.email}`
+          `https://daily-loop-server.vercel.app/my_habits?email=${user.email}`
         );
         setHabits(res.data); // Ensure currentStreak & completionHistory included
       } catch (err) {

@@ -10,7 +10,7 @@ const Leaderboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/leaderboard")
+      .get("https://daily-loop-server.vercel.app/leaderboard")
       .then((res) => setLeaders(res.data))
       .catch((err) => console.error(err));
   }, []);

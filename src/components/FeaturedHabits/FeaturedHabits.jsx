@@ -32,7 +32,7 @@ const FeaturedHabits = () => {
     setHabits([]);
     setLoading(true);
     axios
-      .get("http://localhost:3000/featured_habits")
+      .get("https://daily-loop-server.vercel.app/featured_habits")
       .then((data) => {
         const featuredItem = data.data;
         setHabits(featuredItem);

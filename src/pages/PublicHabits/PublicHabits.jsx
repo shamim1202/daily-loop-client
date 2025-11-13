@@ -25,7 +25,9 @@ const PublicHabits = () => {
         confirmButtonColor: "#3B82F6",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/auth/login");
+          navigate("/auth/login", {
+            state: { from: `/habit_details/${habitId}` },
+          });
         }
       });
     } else {

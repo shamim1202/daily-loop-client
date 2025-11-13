@@ -48,32 +48,31 @@ const Navbar = () => {
     </>
   );
 
-  const handleLogOut = () => {
-    signOutUser();
-    console
-      .log(user)
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "You successfully logged out",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        setLoading(false);
-      })
-      .catch((err) => {
-        const code = err.code;
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: `${code}`,
-          text: "Logout failed! Please try again.",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        setLoading(false);
+  const handleLogOut = async () => {
+    try {
+      setLoading(true);
+      await signOutUser();
+      setLoading(false);
+
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Logged out successfully",
+        showConfirmButton: false,
+        timer: 1500,
       });
+      navigate("/", { replace: true });
+    } catch (err) {
+      setLoading(false);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Logout failed",
+        text: err.message || "Please try again",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
   };
 
   return (

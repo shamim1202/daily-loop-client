@@ -1,7 +1,7 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider";
 
@@ -12,6 +12,7 @@ const ViewDetails = () => {
   const [loadingHabit, setLoadingHabit] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation()
 
   useEffect(() => {
     const fetchHabit = async () => {
@@ -110,6 +111,11 @@ const ViewDetails = () => {
     }
   };
 
+  const handleBack = () => {
+    const from = location.state?.from || "/"; // default home
+    navigate(from, { replace: true }); // replace prevents extra login page in history
+  }
+
   // Confetti Component
   const ConfettiEmoji = () => {
     const [emojis] = useState(Array.from({ length: 30 }));
@@ -133,7 +139,7 @@ const ViewDetails = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 bg-linear-to-r from-blue-100 via-purple-100 to-green-100">
-      <button onClick={() => navigate(-1)} className="btn btn-outline btn-primary btn-xs md:btn-sm mb-3 md:mb-6">
+      <button onClick={handleBack} className="btn btn-outline btn-primary btn-xs md:btn-sm mb-3 md:mb-6">
         ← Back
       </button>
 

@@ -11,7 +11,7 @@ const WhyBuildHabits = () => {
       ) : (
         <section>
           <h2 className="text-2xl md:text-4xl font-bold text-secondary text-center mb-5 md:mb-8">
-            Why Build Habits?
+            🌱 Why Build Habits?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">

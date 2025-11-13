@@ -14,7 +14,9 @@ const Footer = () => {
         <div className="md:max-w-7xl mx-auto flex flex-col-reverse md:flex-row md:gap-40 text-center md:text-left">
           <div className="flex flex-col md:flex-row md:w-full justify-between space-y-3 md:space-y-0">
             <nav>
-              <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">Services</h6>
+              <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">
+                Services
+              </h6>
               <div className="flex flex-col text-xs md:text-base">
                 <a className="link link-hover">Branding</a>
                 <a className="link link-hover">Design</a>
@@ -24,7 +26,9 @@ const Footer = () => {
             </nav>
 
             <nav>
-              <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">Company</h6>
+              <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">
+                Company
+              </h6>
               <div className="flex flex-col text-xs md:text-base">
                 <a className="link link-hover">About us</a>
                 <a className="link link-hover">Contact</a>
@@ -34,7 +38,9 @@ const Footer = () => {
             </nav>
 
             <nav>
-              <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">Legal</h6>
+              <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">
+                Legal
+              </h6>
               <div className="flex flex-col text-xs md:text-base">
                 <a className="link link-hover">Terms of use</a>
                 <a className="link link-hover">Privacy policy</a>
@@ -46,7 +52,9 @@ const Footer = () => {
           {/* ------> Subscribe <------- */}
           <div className="md:w-6/12 mb-5 md:mb-0">
             <form>
-              <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">Newsletter</h6>
+              <h6 className="text-base md:text-lg font-semibold opacity-70 md:mb-2">
+                Newsletter
+              </h6>
               <fieldset className="w-full">
                 <label className="text-xs md:text-base">
                   Enter your email address
@@ -103,10 +111,15 @@ const Footer = () => {
 
           <aside className="flex flex-col items-center justify-center">
             <Link to="/">
-              <img src="/src/assets/logo.png" alt="" className="w-14 md:w-20 " />
+              <img
+                src="https://i.ibb.co.com/7dww9QDP/logo.png"
+                alt=""
+                className="w-14 md:w-20 "
+              />
             </Link>
             <p className="text-xs md:text-sm pt-2 md:pt-4">
-              Copyright © {new Date().getFullYear()} Daily Loop Inc. All right reserved
+              Copyright © {new Date().getFullYear()} Daily Loop Inc. All right
+              reserved
             </p>
           </aside>
         </div>

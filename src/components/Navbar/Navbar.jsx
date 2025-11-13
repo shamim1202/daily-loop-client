@@ -100,7 +100,7 @@ const Navbar = () => {
           </div>
           <Link to="/">
             <img
-              src="/src/assets/logo.png"
+              src="https://i.ibb.co.com/7dww9QDP/logo.png"
               alt=""
               className="md:w-16 lg:w-20 hidden md:block"
             />
@@ -111,7 +111,7 @@ const Navbar = () => {
         <div className="navbar-center md:font-medium">
           <Link to="/">
             <img
-              src="/src/assets/logo.png"
+              src="https://i.ibb.co.com/7dww9QDP/logo.png"
               alt=""
               className="w-16 block md:hidden"
             />

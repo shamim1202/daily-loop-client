@@ -66,7 +66,7 @@ const TestimonialCarousel = () => {
       ) : (
         <section>
           <h2 className="text-2xl md:text-4xl text-secondary font-bold text-center mb-4 md:mb-7">
-            What Our Users Say
+            💬 What Our Users Say
           </h2>
           <div
             ref={carouselRef}

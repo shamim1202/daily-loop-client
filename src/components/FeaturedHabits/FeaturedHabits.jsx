@@ -46,7 +46,7 @@ const FeaturedHabits = () => {
   return (
     <div className="px-6 md:px-12">
       <h2 className="text-2xl md:text-4xl font-bold text-center text-secondary mb-5 md:mb-8">
-        Featured Habits
+        🏅 Featured Habits
       </h2>
 
       {loading ? (

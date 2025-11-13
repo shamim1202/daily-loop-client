@@ -150,15 +150,15 @@ const ViewDetails = () => {
       {showConfetti && <ConfettiEmoji />}
 
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-        className="bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row md:gap-6">
+        className="overflow-hidden flex flex-col md:flex-row md:gap-6">
         
         {/*-------------- Image ---------------*/}
         <div className="md:w-1/2 h-52 md:h-auto">
-          <img src={habit.imageUrl || habit.title} alt={habit.title} className="w-full h-full object-cover rounded-t-2xl md:rounded-t-none md:rounded-l-2xl" />
+          <img src={habit.imageUrl || habit.title} alt={habit.title} className="w-full md:h-96 object-cover rounded-t-2xl md:rounded-2xl" />
         </div>
 
         {/* Details */}
-        <div className="md:w-1/2 p-4 md:p-6 flex flex-col justify-between">
+        <div className="bg-gray-50 rounded-b-2xl md:rounded-2xl md:w-1/2 p-4 md:p-6 flex flex-col justify-between">
           <div>
             <h3 className="md:text-xl font-bold text-primary mb-2">{habit.title}</h3>
             <p className="text-gray-600 text-sm md:text-base mb-4">{habit.description}</p>

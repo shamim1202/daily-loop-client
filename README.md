@@ -1,16 +1,57 @@
-# React + Vite
+# DailyLoop — Build Better Habits Every Day
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site URL:** [https://dailyloop-habitapp.web.app/](https://dailyloop-habitapp.web.app/)
 
-Currently, two official plugins are available:
+DailyLoop is a modern habit-tracking web application designed to help users create, track, and maintain daily habits effectively.  
+It encourages consistency by using streaks, progress visualization, and motivational UI interactions — helping you stay focused and productive.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🧠 **Create & Manage Habits:** Users can easily create new habits, edit them, and track daily progress.  
+- 🔥 **Daily Streak Tracker:** Keep your motivation high by tracking daily completions — like GitHub contribution streaks!  
+- 🌍 **Public Habit Feed:** Discover habits created by other users and view community-wide habit trends.  
+- ⭐ **Featured Section:** Showcases the six most recently added habits in a clean, modern card layout.  
+- 🏆 **Top 3 Habit Champions:** Displays the top users with the highest streaks in an engaging leaderboard design.  
+- 💬 **User Testimonials:** A modern carousel section where users share their experiences and success stories.  
+- 📱 **Fully Responsive Design:** Works seamlessly on mobile, tablet, and desktop using TailwindCSS and Framer Motion animations.  
+- 🔒 **Google Authentication:** Secure login via Firebase Authentication for personalized habit tracking.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+**Frontend:**  
+- React 19  
+- Tailwind CSS (Vite setup)  
+- Framer Motion (animations)  
+- Axios  
+- SweetAlert2  
+- Firebase Authentication  
+- React Router v7  
+
+**Backend:**  
+- Express.js  
+- MongoDB (with Atlas cloud database)  
+- CORS Middleware  
+
+---
+
+## 🧭 Navigation Overview
+
+- **Home:** Hero slider, featured habits, motivational sections, and leaderboard.  
+- **Public Habits:** View habits created by all users.  
+- **My Habits:** Manage and track your own created habits (login required).  
+- **Add Habit:** Create a new habit with title, description, and category (login required).  
+
+---
+
+## 👨‍💻 Developer
+
+**Developed by:** [Your Name]  
+**GitHub Repository:** [https://github.com/yourusername/dailyloop-client](https://github.com/yourusername/dailyloop-client)
+
+---
+
+> _“Small daily improvements lead to stunning long-term results.” – Keep looping daily with **DailyLoop** 🌿_
